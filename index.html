@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Chouhan Wedding | Arbaz ❤️ Sameera</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        // ============================================================
+        // 🛠️ MASTER DATA (YOUR UPDATED DETAILS)
+        // ============================================================
+        const WEDDING_DATA = {
+            groom: {
+                fullName: "Arbaz Chouhan",
+                father: "Mohammad Aslam Chouhan",
+                grandfather: "Marhum Mumtaz Chouhan",
+                city: "Laxmangarh (Sikar)",
+                photo: "arbaz.jpg"
+            },
+            bride: {
+                fullName: "Sameera Khokhar",
+                father: "Khushi Mohammad Ji Khokhar",
+                grandfather: "Marhum Lal Ji",
+                city: "Magluna Laxmangarh (Sikar)",
+                photo: "sameera.jpg"
+            },
+            events: {
+                haldi:    { date: "13 JULY 2026", time: "06:00 PM", venue: "Chouhan House, Laxmangarh" },
+                ratijaga: { date: "14 JULY 2026", time: "08:00 PM", venue: "Chouhan House, Laxmangarh" },
+                barat:    { date: "15 JULY 2026", time: "02:00 PM Nikasi", venue: "Laxmangarh to Magluna" }
+            },
+            familyMain: [
+                "Marhum Haji Rafiq", "Marhum Haji Yaqoob", "Marhum Haji Mumtaj",
+                "Marhum Haji Farook", "Ayub Chouhan", "Habib Chouhan",
+                "Aasif Chouhan", "Imtiyaj Chouhan", "Shakil Chouhan", "Umar Chouhan (Romeo)"
+            ],
+            friends: ["Dost 1", "Dost 2", "Dost 3", "Dost 4", "Dost 5"],
+            damadBahnoi: [
+                "Marhum Farook Agwan", "Kurshid Agwan", "Marhum Rashid Pathan",
+                "Aarif Pathan", "Tayub Agwan", "Aasif Agwan",
+            ],
+            kids: ["Anas", "Sana", "Ayat", "Aizan", "Sami", "Abdullah", "Mohammed"],
+            host: {
+                name: "Mohammad Aslam Chouhan",
+                address: "Idgah Masjid ke Paas, Ward No. 11, Laxmangarh",
+                phone: "0000000000"
+            }
+        };
+    </script>
+
+    <style>
+        :root { --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c); }
+        body { background-color: #080808; color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        .font-cursive { font-family: 'Alex Brush', cursive; }
+        .font-royal { font-family: 'Cinzel Decorative', serif; }
+        .gold-text { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; transition: 0.4s; }
+        .glass-card:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 10px 30px rgba(179, 135, 40, 0.2); }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
+        .floating { animation: float 3s ease-in-out infinite; }
+        .image-frame { border: 4px double #b38728; padding: 6px; border-radius: 15px; background: #000; box-shadow: 0 0 20px rgba(179,135,40,0.4); }
+        .btn-call { background: var(--gold-gradient); color: black; font-weight: bold; border-radius: 50px; padding: 12px 35px; box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body onload="renderWedding()">
+
+<section class="h-screen w-full flex flex-col items-center justify-center text-center p-6 bg-black relative border-b-2 border-gold-600/20">
+    <div class="floating text-6xl mb-6">🌸</div>
+    <div data-aos="zoom-in" data-aos-duration="1500">
+        <h2 class="font-royal text-xl tracking-[0.4em] text-gray-400 mb-2">WELCOME TO THE</h2>
+        <h1 class="font-cursive text-7xl md:text-9xl gold-text">Chouhan Wedding</h1>
+        <div class="h-[2px] w-40 bg-gold-500 mx-auto my-8" style="background:var(--gold-gradient)"></div>
+        <p class="floating text-5xl mt-4">✨</p>
+        <p class="text-white/40 italic mt-12 animate-pulse tracking-widest uppercase text-xs">Scroll Down to Enter</p>
+    </div>
+</section>
+
+<section class="py-24 px-6 max-w-6xl mx-auto">
+    <h2 class="font-royal text-center text-3xl gold-text mb-16">The Blessed Couple</h2>
+    <div class="flex flex-col md:flex-row justify-center items-center gap-10">
+        <div class="glass-card p-6 w-full md:w-80 text-center" data-aos="fade-right">
+            <div class="image-frame aspect-[3/4] mb-6 overflow-hidden">
+                <img id="gImg" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://via.placeholder.com/300x400?text=Groom+Photo'">
+            </div>
+            <h3 id="gName" class="text-2xl font-bold gold-text uppercase"></h3>
+            <div class="mt-4 text-sm text-gray-300 space-y-2 pt-4 border-t border-white/10">
+                <p><b>Father:</b> <span id="gFather"></span></p>
+                <p><b>G.Father:</b> <span id="gGF"></span></p>
+                <p><b>City:</b> <span id="gCity"></span></p>
+            </div>
+        </div>
+
+        <div class="text-5xl gold-text floating">❤️</div>
+
+        <div class="glass-card p-6 w-full md:w-80 text-center" data-aos="fade-left">
+            <div class="image-frame aspect-[3/4] mb-6 overflow-hidden">
+                <img id="bImg" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://via.placeholder.com/300x400?text=Bride+Photo'">
+            </div>
+            <h3 id="bName" class="text-2xl font-bold gold-text uppercase"></h3>
+            <div class="mt-4 text-sm text-gray-300 space-y-2 pt-4 border-t border-white/10">
+                <p><b>Father:</b> <span id="bFather"></span></p>
+                <p><b>G.Father:</b> <span id="bGF"></span></p>
+                <p><b>City:</b> <span id="bCity"></span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-zinc-900/50 text-center px-6 border-y border-yellow-900/20">
+    <p class="font-cursive text-3xl md:text-5xl leading-tight max-w-4xl mx-auto gold-text">
+        "Shahron mein khushbu Madine se aati hai,<br>
+        Dulha-Dulhan ke chehre pe raunak Jannat se aati hai."
+    </p>
+</section>
+
+<section class="py-24 px-6 space-y-20 max-w-4xl mx-auto">
+    <div class="text-center" data-aos="zoom-in">
+        <div class="text-8xl floating mb-4">🍯</div>
+        <h2 class="font-royal text-4xl gold-text mb-6">Haldi Ceremony</h2>
+        <div class="glass-card p-8 border-l-8 border-yellow-500 text-left">
+            <p>📅 <b>Date:</b> <span id="evHDate"></span></p>
+            <p>⏰ <b>Time:</b> <span id="evHTime"></span></p>
+            <p>📍 <b>Venue:</b> <span id="evHVenue"></span></p>
+        </div>
+    </div>
+    <div class="text-center" data-aos="zoom-in">
+        <div class="text-8xl floating mb-4">💃</div>
+        <h2 class="font-royal text-4xl gold-text mb-6">Ratijaga / Sangeet</h2>
+        <div class="glass-card p-8 border-l-8 border-pink-500 text-left">
+            <p>📅 <b>Date:</b> <span id="evRDate"></span></p>
+            <p>⏰ <b>Time:</b> <span id="evRTime"></span></p>
+            <p>📍 <b>Venue:</b> <span id="evRVenue"></span></p>
+        </div>
+    </div>
+    <div class="text-center" data-aos="zoom-in">
+        <div class="text-8xl floating mb-4">🐎</div>
+        <h2 class="font-royal text-4xl gold-text mb-6">Barat & Nikah</h2>
+        <div class="glass-card p-8 border-l-8 border-red-600 text-left">
+            <p>📅 <b>Date:</b> <span id="evBDate"></span></p>
+            <p>⏰ <b>Nikasi:</b> <span id="evBTime"></span></p>
+            <p>📍 <b>Venue:</b> <span id="evBVenue"></span></p>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 px-6 max-w-6xl mx-auto space-y-24">
+    <div>
+        <h2 class="font-royal text-center text-3xl gold-text mb-10 uppercase">Chouhan Family Members</h2>
+        <div id="listFamily" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center"></div>
+    </div>
+    <div>
+        <h2 class="font-royal text-center text-3xl text-blue-400 mb-10 uppercase">Dulhe Ke Yaar (Friends)</h2>
+        <div id="listFriends" class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center"></div>
+    </div>
+    <div>
+        <h2 class="font-royal text-center text-3xl text-pink-400 mb-10 uppercase tracking-widest">(Sab Damad )</h2>
+        <div id="listDamad" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center"></div>
+    </div>
+</section>
+
+<section class="py-24 px-6 text-center">
+    <div class="glass-card p-12 max-w-2xl mx-auto border-2 border-gold-500/30">
+        <h2 class="font-royal text-xl gold-text mb-6 uppercase tracking-widest">With Best Compliments</h2>
+        <h3 id="hostName" class="text-4xl font-bold mb-3"></h3>
+        <p id="hostAddr" class="text-gray-400 mb-8 italic"></p>
+        <a id="hostPhone" class="btn-call inline-flex items-center gap-3 active:scale-95 transition"></a>
+    </div>
+</section>
+
+<section class="py-20 bg-black px-6 text-center">
+    <h2 class="font-cursive text-5xl gold-text mb-12">Nanhi Farmaish</h2>
+    <div id="listKids" class="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto"></div>
+    <p class="mt-12 text-yellow-500 italic text-2xl">"Mere Bhai ki Shadi mein zaroor zaroor aana ji!"</p>
+</section>
+
+<section class="py-20 bg-black px-6 text-center">
+    <h2 class="font-cursive text-5xl gold-text mb-12">Design By </h2>
+    <div id="listKids" class="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto"></div>
+    <p class="mt-12 text-yellow-500 italic text-2xl">"Shakil Chouhan"</p>
+</section>
+<script>
+    AOS.init({ duration: 1000, once: true });
+
+    function renderWedding() {
+        const d = WEDDING_DATA;
+
+        // Couple Data
+        document.getElementById('gName').innerText = d.groom.fullName;
+        document.getElementById('gFather').innerText = d.groom.father;
+        document.getElementById('gGF').innerText = d.groom.grandfather;
+        document.getElementById('gCity').innerText = d.groom.city;
+        document.getElementById('gImg').src = d.groom.photo;
+
+        document.getElementById('bName').innerText = d.bride.fullName;
+        document.getElementById('bFather').innerText = d.bride.father;
+        document.getElementById('bGF').innerText = d.bride.grandfather;
+        document.getElementById('bCity').innerText = d.bride.city;
+        document.getElementById('bImg').src = d.bride.photo;
+
+        // Events Data
+        document.getElementById('evHDate').innerText = d.events.haldi.date;
+        document.getElementById('evHTime').innerText = d.events.haldi.time;
+        document.getElementById('evHVenue').innerText = d.events.haldi.venue;
+        document.getElementById('evRDate').innerText = d.events.ratijaga.date;
+        document.getElementById('evRTime').innerText = d.events.ratijaga.time;
+        document.getElementById('evRVenue').innerText = d.events.ratijaga.venue;
+        document.getElementById('evBDate').innerText = d.events.barat.date;
+        document.getElementById('evBTime').innerText = d.events.barat.time;
+        document.getElementById('evBVenue').innerText = d.events.barat.venue;
+
+        // Lists Rendering
+        const fill = (id, list, cls) => {
+            const el = document.getElementById(id);
+            list.forEach(n => {
+                const i = document.createElement('div');
+                i.className = `glass-card p-4 font-bold text-xs md:text-sm ${cls}`;
+                i.innerText = n;
+                el.appendChild(i);
+            });
+        };
+
+        fill('listFamily', d.familyMain, 'border-yellow-500/20');
+        fill('listFriends', d.friends, 'border-blue-500/20 text-blue-200');
+        fill('listDamad', d.damadBahnoi, 'border-pink-500/20 text-pink-100');
+        fill('listKids', d.kids, 'rounded-full px-6 py-2 border-white/10');
+
+        // Host Data
+        document.getElementById('hostName').innerText = d.host.name;
+        document.getElementById('hostAddr').innerText = d.host.address;
+        document.getElementById('hostPhone').innerHTML = `<i class="fa-solid fa-phone"></i> ${d.host.phone}`;
+        document.getElementById('hostPhone').href = `tel:${d.host.phone}`;
+    }
+</script>
+</body>
+</html>
