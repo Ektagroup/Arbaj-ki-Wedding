@@ -46,174 +46,274 @@
             host: {
                 name: "Mohammad Aslam Chouhan",
                 address: "Idgah Masjid ke Paas, Ward No. 11, Laxmangarh",
-                phone: "7976172062"
+                phone: "0000000000",
+                photo: "Mohammad Aslam Chouhan.jpg"
             }
         };
     </script>
 
     <style>
         :root { --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c); }
-        body { background-color: #080808; color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        body {
+            background-color: #080808;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
         .font-cursive { font-family: 'Alex Brush', cursive; }
         .font-royal { font-family: 'Cinzel Decorative', serif; }
-        .gold-text { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
-
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 24px; transition: 0.4s; }
-        .glass-card:hover { border-color: rgba(212, 175, 55, 0.5); transform: translateY(-8px); box-shadow: 0 15px 35px rgba(179, 135, 40, 0.2); }
-
-        .member-photo-frame {
-            width: 80px; height: 80px;
-            border-radius: 50%;
-            border: 3px solid #b38728;
-            padding: 4px;
-            background: #000;
-            margin: 0 auto 12px auto;
-            overflow: hidden;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
         }
-        .glass-card:hover .member-photo-frame { transform: scale(1.1); border-color: #fcf6ba; box-shadow: 0 0 20px rgba(250, 204, 21, 0.5); }
-        .member-photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-12px) scale(1.04);
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+
+        .member-card {
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+        .member-card:hover {
+            transform: translateY(-12px) scale(1.05);
+        }
+        .member-photo {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 16px 16px 0 0;
+            transition: transform 0.6s ease;
+        }
+        .member-card:hover .member-photo {
+            transform: scale(1.12);
+        }
+
+        .name-tag {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0.95));
+            padding: 12px 8px 14px;
+            font-size: 13.5px;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+        }
 
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         .floating { animation: float 3s ease-in-out infinite; }
-        .image-frame { border: 4px double #b38728; padding: 6px; border-radius: 20px; background: #000; box-shadow: 0 10px 30px rgba(179,135,40,0.3); }
-        .btn-call { background: var(--gold-gradient); color: black; font-weight: 800; border-radius: 50px; padding: 15px 40px; display: inline-block; transition: 0.3s; box-shadow: 0 5px 20px rgba(179,135,40,0.4); }
-        .btn-call:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 10px 30px rgba(179,135,40,0.6); }
+
+        .image-frame {
+            border: 4px double #b38728;
+            padding: 6px;
+            border-radius: 18px;
+            background: #000;
+            box-shadow: 0 0 25px rgba(179,135,40,0.5);
+        }
+
+        .btn-call {
+            background: var(--gold-gradient);
+            color: black;
+            font-weight: bold;
+            border-radius: 50px;
+            padding: 14px 40px;
+        }
+
+        /* Lightbox Modal */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        #lightbox img {
+            max-width: 100%;
+            max-height: 92vh;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(255,215,0,0.6);
+        }
+        #lightbox .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 10000;
+        }
     </style>
 </head>
 <body onload="renderWedding()">
 
+<!-- Hero Section -->
 <section class="h-screen w-full flex flex-col items-center justify-center text-center p-6 bg-black relative border-b-2 border-gold-600/20">
-    <div class="absolute top-10 floating text-6xl">🌹</div>
+    <div class="floating text-6xl mb-6">🌸</div>
     <div data-aos="zoom-in" data-aos-duration="1500">
-        <h2 class="font-royal text-xl tracking-[0.4em] text-gray-400 mb-4">WELCOME TO THE</h2>
-        <h1 class="font-cursive text-7xl md:text-9xl gold-text mb-4">Chouhan Wedding</h1>
+        <h2 class="font-royal text-xl tracking-[0.4em] text-gray-400 mb-2">WELCOME TO THE</h2>
+        <h1 class="font-cursive text-7xl md:text-9xl gold-text">Chouhan Wedding</h1>
         <div class="h-[2px] w-40 bg-gold-500 mx-auto my-8" style="background:var(--gold-gradient)"></div>
-        <p class="floating text-5xl mt-4">✨</p>
-        <p class="text-white/40 italic mt-12 animate-pulse tracking-widest uppercase text-xs">Scroll to Enter the Celebration</p>
+        <p class="floating text-5xl mt-4">✨ Arbaz ❤️ Sameera ✨</p>
+        <p class="text-white/40 italic mt-12 animate-pulse tracking-widest uppercase text-xs">Scroll Down to Enter</p>
     </div>
-    <div class="absolute bottom-10 floating text-5xl" style="animation-delay: 1s">💖</div>
 </section>
 
+<!-- The Blessed Couple -->
 <section class="py-24 px-6 max-w-6xl mx-auto">
-    <h2 class="font-royal text-center text-3xl gold-text mb-20" data-aos="fade-down">The Blessed Couple</h2>
-    <div class="flex flex-col md:flex-row justify-center items-center gap-12">
-        <div class="glass-card p-8 w-full md:w-96 text-center" data-aos="fade-right">
-            <div class="image-frame aspect-[3/4] mb-8 overflow-hidden">
-                <img id="gImg" class="w-full h-full object-cover rounded-xl" onerror="this.src='https://via.placeholder.com/300x400?text=Arbaz'">
+    <h2 class="font-royal text-center text-3xl gold-text mb-16">The Blessed Couple</h2>
+    <div class="flex flex-col md:flex-row justify-center items-center gap-10">
+        <div class="glass-card p-6 w-full md:w-80 text-center" data-aos="fade-right">
+            <div class="image-frame aspect-[3/4] mb-6 overflow-hidden">
+                <img id="gImg" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://via.placeholder.com/300x400?text=Arbaz'">
             </div>
-            <h3 id="gName" class="text-3xl font-bold gold-text uppercase tracking-wider"></h3>
-            <div class="mt-6 text-gray-300 space-y-3 pt-6 border-t border-white/10">
-                <p><b>Father:</b> <span id="gFather" class="text-white font-semibold"></span></p>
-                <p><b>G.Father:</b> <span id="gGF" class="text-white font-semibold"></span></p>
-                <p><b>City:</b> <span id="gCity" class="text-white font-semibold"></span></p>
+            <h3 id="gName" class="text-2xl font-bold gold-text uppercase"></h3>
+            <div class="mt-4 text-sm text-gray-300 space-y-2 pt-4 border-t border-white/10">
+                <p><b>Father:</b> <span id="gFather"></span></p>
+                <p><b>G.Father:</b> <span id="gGF"></span></p>
+                <p><b>City:</b> <span id="gCity"></span></p>
             </div>
         </div>
 
-        <div class="text-6xl gold-text floating p-4">❤️</div>
+        <div class="text-6xl gold-text floating">❤️</div>
 
-        <div class="glass-card p-8 w-full md:w-96 text-center" data-aos="fade-left">
-            <div class="image-frame aspect-[3/4] mb-8 overflow-hidden">
-                <img id="bImg" class="w-full h-full object-cover rounded-xl" onerror="this.src='https://via.placeholder.com/300x400?text=Sameera'">
+        <div class="glass-card p-6 w-full md:w-80 text-center" data-aos="fade-left">
+            <div class="image-frame aspect-[3/4] mb-6 overflow-hidden">
+                <img id="bImg" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://via.placeholder.com/300x400?text=Sameera'">
             </div>
-            <h3 id="bName" class="text-3xl font-bold gold-text uppercase tracking-wider"></h3>
-            <div class="mt-6 text-gray-300 space-y-3 pt-6 border-t border-white/10">
-                <p><b>Father:</b> <span id="bFather" class="text-white font-semibold"></span></p>
-                <p><b>G.Father:</b> <span id="bGF" class="text-white font-semibold"></span></p>
-                <p><b>City:</b> <span id="bCity" class="text-white font-semibold"></span></p>
+            <h3 id="bName" class="text-2xl font-bold gold-text uppercase"></h3>
+            <div class="mt-4 text-sm text-gray-300 space-y-2 pt-4 border-t border-white/10">
+                <p><b>Father:</b> <span id="bFather"></span></p>
+                <p><b>G.Father:</b> <span id="bGF"></span></p>
+                <p><b>City:</b> <span id="bCity"></span></p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-20 bg-zinc-900/50 text-center px-6 border-y border-yellow-900/20" data-aos="fade-up">
-    <i class="fa-solid fa-quote-left text-3xl gold-text mb-6"></i>
-    <p class="font-cursive text-3xl md:text-5xl leading-tight max-w-5xl mx-auto gold-text">
+<!-- Shayari -->
+<section class="py-20 bg-zinc-900/50 text-center px-6 border-y border-yellow-900/20">
+    <p class="font-cursive text-3xl md:text-5xl leading-tight max-w-4xl mx-auto gold-text">
         "Shahron mein khushbu Madine se aati hai,<br>
         Dulha-Dulhan ke chehre pe raunak Jannat se aati hai."
     </p>
-    <i class="fa-solid fa-quote-right text-3xl gold-text mt-6"></i>
 </section>
 
-<section class="py-28 px-6 space-y-28 max-w-5xl mx-auto">
-    <!-- Events sections same -->
+<!-- Events -->
+<section class="py-24 px-6 space-y-20 max-w-4xl mx-auto">
     <div class="text-center" data-aos="zoom-in">
-        <div class="text-9xl floating mb-6">🍯</div>
+        <div class="text-8xl floating mb-4">🍯</div>
         <h2 class="font-royal text-4xl gold-text mb-6">Haldi Ceremony</h2>
-        <div class="glass-card p-10 border-l-8 border-yellow-500 text-left relative overflow-hidden">
-            <div class="absolute right-0 top-0 opacity-10 text-9xl">🍯</div>
-            <p class="text-xl">📅 <b>Date:</b> <span id="evHDate" class="font-semibold"></span></p>
-            <p class="text-xl my-3">⏰ <b>Time:</b> <span id="evHTime" class="font-semibold"></span></p>
-            <p class="text-xl">📍 <b>Venue:</b> <span id="evHVenue" class="font-semibold"></span></p>
+        <div class="glass-card p-8 border-l-8 border-yellow-500 text-left">
+            <p>📅 <b>Date:</b> <span id="evHDate"></span></p>
+            <p>⏰ <b>Time:</b> <span id="evHTime"></span></p>
+            <p>📍 <b>Venue:</b> <span id="evHVenue"></span></p>
         </div>
     </div>
 
-    <div class="text-center" data-aos="zoom-in" data-aos-delay="200">
-        <div class="text-9xl floating mb-6" style="animation-delay: 0.5s">💃</div>
+    <div class="text-center" data-aos="zoom-in">
+        <div class="text-8xl floating mb-4">💃</div>
         <h2 class="font-royal text-4xl gold-text mb-6">Ratijaga / Sangeet</h2>
-        <div class="glass-card p-10 border-l-8 border-pink-500 text-left relative overflow-hidden">
-            <div class="absolute right-0 top-0 opacity-10 text-9xl">🎵</div>
-            <p class="text-xl">📅 <b>Date:</b> <span id="evRDate" class="font-semibold"></span></p>
-            <p class="text-xl my-3">⏰ <b>Time:</b> <span id="evRTime" class="font-semibold"></span></p>
-            <p class="text-xl">📍 <b>Venue:</b> <span id="evRVenue" class="font-semibold"></span></p>
+        <div class="glass-card p-8 border-l-8 border-pink-500 text-left">
+            <p>📅 <b>Date:</b> <span id="evRDate"></span></p>
+            <p>⏰ <b>Time:</b> <span id="evRTime"></span></p>
+            <p>📍 <b>Venue:</b> <span id="evRVenue"></span></p>
         </div>
     </div>
 
-    <div class="text-center" data-aos="zoom-in" data-aos-delay="400">
-        <div class="text-9xl floating mb-6" style="animation-delay: 1s">🐎</div>
+    <div class="text-center" data-aos="zoom-in">
+        <div class="text-8xl floating mb-4">🐎</div>
         <h2 class="font-royal text-4xl gold-text mb-6">Barat & Nikah</h2>
-        <div class="glass-card p-10 border-l-8 border-red-600 text-left relative overflow-hidden">
-            <div class="absolute right-0 top-0 opacity-10 text-9xl">💍</div>
-            <p class="text-xl">📅 <b>Date:</b> <span id="evBDate" class="font-semibold"></span></p>
-            <p class="text-xl my-3">⏰ <b>Nikasi:</b> <span id="evBTime" class="font-semibold"></span></p>
-            <p class="text-xl">📍 <b>Venue:</b> <span id="evBVenue" class="font-semibold"></span></p>
+        <div class="glass-card p-8 border-l-8 border-red-600 text-left">
+            <p>📅 <b>Date:</b> <span id="evBDate"></span></p>
+            <p>⏰ <b>Nikasi:</b> <span id="evBTime"></span></p>
+            <p>📍 <b>Venue:</b> <span id="evBVenue"></span></p>
         </div>
     </div>
 </section>
 
-<section class="py-24 px-6 max-w-7xl mx-auto space-y-28">
-    <div data-aos="fade-up">
-        <h2 class="font-royal text-center text-3xl gold-text mb-12 uppercase tracking-wider">Chouhan Family Members</h2>
-        <div id="listFamily" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center"></div>
+<!-- Family, Friends, Damad -->
+<section class="py-20 px-6 max-w-6xl mx-auto space-y-24">
+    <div>
+        <h2 class="font-royal text-center text-3xl gold-text mb-12 uppercase tracking-widest">Chouhan Family Members</h2>
+        <div id="listFamily" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"></div>
     </div>
 
-    <div data-aos="fade-up">
-        <h2 class="font-royal text-center text-3xl text-blue-400 mb-12 uppercase tracking-wider">Dulhe Ke Yaar (Friends)</h2>
-        <div id="listFriends" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-center"></div>
+    <div>
+        <h2 class="font-royal text-center text-3xl text-blue-400 mb-12 uppercase tracking-widest">Dulhe Ke Yaar (Friends)</h2>
+        <div id="listFriends" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6"></div>
     </div>
 
-    <div data-aos="fade-up">
-        <h2 class="font-royal text-center text-3xl text-pink-400 mb-12 uppercase tracking-wider">Special Guests (Damad & Bahnoi)</h2>
-        <div id="listDamad" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center"></div>
+    <div>
+        <h2 class="font-royal text-center text-3xl text-pink-400 mb-12 uppercase tracking-widest">(Sab Damad & Bahnoi)</h2>
+        <div id="listDamad" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"></div>
     </div>
 </section>
 
-<section class="py-28 px-6 text-center bg-zinc-900/30 border-y border-white/5">
-    <div class="glass-card p-12 max-w-3xl mx-auto border-2 border-gold-500/30" data-aos="zoom-out">
-        <h2 class="font-royal text-xl gold-text mb-8 uppercase tracking-widest">With Best Compliments From</h2>
-        <div class="member-photo-frame" style="width: 120px; height: 120px; border-width: 4px; margin-bottom: 20px;">
-            <img src="aslam_father.jpg" alt="Mohammad Aslam Chouhan" onerror="this.src='https://via.placeholder.com/150?text=Father'">
+<!-- Kids -->
+<section class="py-24 px-6 text-center bg-zinc-950">
+    <h2 class="font-cursive text-5xl gold-text mb-12">Nanhi Farmaish - Hamare Pyare Bacche ❤️</h2>
+    <div id="listKids" class="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto"></div>
+    <p class="mt-16 text-yellow-400 italic text-2xl">"Mere Bhai ki Shadi mein zaroor zaroor aana ji!"</p>
+</section>
+
+<!-- Host Section with Photo -->
+<section class="py-20 px-6 text-center">
+    <div class="glass-card p-8 md:p-12 max-w-2xl mx-auto border-2 border-gold-500/30">
+        <h2 class="font-royal text-xl gold-text mb-8 uppercase tracking-widest">Father Saab</h2>
+
+        <div class="flex flex-col items-center">
+            <!-- Host Photo -->
+            <div onclick="showBigPhoto(WEDDING_DATA.host.photo)"
+                 class="cursor-pointer w-52 h-52 mx-auto mb-6 overflow-hidden rounded-2xl border-4 border-yellow-400 shadow-2xl">
+                <img id="hostPhoto"
+                     src="Mohammad Aslam Chouhan.jpg"
+                     class="w-full h-full object-cover"
+                     onerror="this.src='https://via.placeholder.com/300x300/1f1f1f/aaaaaa?text=Host'">
+            </div>
+
+            <h3 id="hostName" class="text-3xl font-bold gold-text mb-2"></h3>
+            <p id="hostAddr" class="text-gray-400 mb-6 text-center italic px-4"></p>
+
+            <a id="hostPhone" class="btn-call inline-flex items-center gap-3 active:scale-95 transition"></a>
         </div>
-        <h3 id="hostName" class="text-4xl font-bold mb-3 tracking-tight"></h3>
-        <p id="hostAddr" class="text-gray-400 mb-10 italic text-lg max-w-lg mx-auto"></p>
-        <a id="hostPhone" class="btn-call inline-flex items-center gap-3 text-lg active:scale-95 transition"></a>
     </div>
 </section>
 
-<section class="py-24 bg-black px-6 text-center">
-    <h2 class="font-cursive text-5xl gold-text mb-12">Nanhi Farmaish</h2>
-    <div id="listKids" class="flex flex-wrap justify-center gap-5 max-w-4xl mx-auto"></div>
-    <p class="mt-16 text-yellow-500 italic text-2xl font-wedding floating">"Mere Bhai ki Shadi mein zaroor zaroor aana ji!"</p>
+<!-- Design By -->
+<section class="py-20 bg-black px-6 text-center">
+    <h2 class="font-cursive text-5xl gold-text mb-8">Design By</h2>
+    <p class="text-3xl text-yellow-400">Shakil Chouhan</p>
 </section>
 
-<section class="py-10 bg-black px-6 text-center border-t border-gold-900/10">
-    <h2 class="font-royal text-xs gold-text mb-2 uppercase opacity-50">Design By</h2>
-    <p class="text-white text-xl font-bold tracking-tight">Shakil Chouhan</p>
-</section>
+<!-- Lightbox -->
+<div id="lightbox" onclick="if(event.target === this) closeLightbox()">
+    <span class="close-btn" onclick="closeLightbox()">×</span>
+    <img id="lightboxImage" src="" alt="Big Photo">
+</div>
 
 <script>
-    AOS.init({ duration: 1000, once: true, offset: 50 });
+    AOS.init({ duration: 1000, once: true });
+
+    function showBigPhoto(src) {
+        document.getElementById('lightboxImage').src = src;
+        document.getElementById('lightbox').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+        document.body.style.overflow = 'visible';
+    }
 
     function renderWedding() {
         const d = WEDDING_DATA;
@@ -223,87 +323,84 @@
         document.getElementById('gFather').innerText = d.groom.father;
         document.getElementById('gGF').innerText = d.groom.grandfather;
         document.getElementById('gCity').innerText = d.groom.city;
-        document.getElementById('gImg').src = d.groom.photo || 'https://via.placeholder.com/300x400?text=Arbaz';
+        document.getElementById('gImg').src = d.groom.photo;
 
         document.getElementById('bName').innerText = d.bride.fullName;
         document.getElementById('bFather').innerText = d.bride.father;
         document.getElementById('bGF').innerText = d.bride.grandfather;
         document.getElementById('bCity').innerText = d.bride.city;
-        document.getElementById('bImg').src = d.bride.photo || 'https://via.placeholder.com/300x400?text=Sameera';
+        document.getElementById('bImg').src = d.bride.photo;
 
         // Events
         document.getElementById('evHDate').innerText = d.events.haldi.date;
         document.getElementById('evHTime').innerText = d.events.haldi.time;
         document.getElementById('evHVenue').innerText = d.events.haldi.venue;
-
         document.getElementById('evRDate').innerText = d.events.ratijaga.date;
         document.getElementById('evRTime').innerText = d.events.ratijaga.time;
         document.getElementById('evRVenue').innerText = d.events.ratijaga.venue;
-
         document.getElementById('evBDate').innerText = d.events.barat.date;
         document.getElementById('evBTime').innerText = d.events.barat.time;
         document.getElementById('evBVenue').innerText = d.events.barat.venue;
 
-        // Fixed Photo Rendering Function
-        function fillWithPhotos(containerId, list, extraClass = '', folder = '') {
-            const container = document.getElementById(containerId);
-            if (!container) {
-                console.log("Container not found:", containerId);
-                return;
-            }
-            container.innerHTML = '';
+        // Photo Card
+        function createPhotoCard(fullName) {
+            const card = document.createElement('div');
+            card.className = `glass-card member-card overflow-hidden text-center`;
+            card.setAttribute('data-aos', 'fade-up');
 
-            list.forEach((name, index) => {
-                const item = document.createElement('div');
-                item.className = `glass-card p-5 text-center flex flex-col items-center ${extraClass}`;
-                item.setAttribute('data-aos', 'fade-up');
-                item.setAttribute('data-aos-delay', (index * 80).toString());
+            const fileName = fullName + ".jpg";
 
-                // Clean name for filename
-                let cleanName = name.toLowerCase()
-                    .replace(/[^a-z0-9\s]/g, ' ')
-                    .trim()
-                    .replace(/\s+/g, '_');
+            card.innerHTML = `
+                <img src="${fileName}"
+                     class="member-photo"
+                     loading="lazy"
+                     onerror="this.src='https://via.placeholder.com/300x300/1f1f1f/aaaaaa?text=${encodeURIComponent(fullName.substring(0,15))}';">
+                <div class="name-tag text-white">${fullName}</div>
+            `;
 
-                const photoUrl = folder ? `${folder}/${cleanName}.jpg` : `${cleanName}.jpg`;
-
-                item.innerHTML = `
-                    <div class="member-photo-frame">
-                        <img src="${photoUrl}"
-                             alt="${name}"
-                             onerror="this.src='https://via.placeholder.com/100?text=${encodeURIComponent(name.split(' ')[0])}'">
-                    </div>
-                    <p class="font-bold text-sm tracking-tight">${name}</p>
-                `;
-                container.appendChild(item);
-            });
+            card.onclick = () => showBigPhoto(fileName);
+            return card;
         }
 
-        // Render All Member Sections
-        fillWithPhotos('listFamily', d.familyMain, 'border-yellow-500/20', 'family');
-        fillWithPhotos('listFriends', d.friends, 'border-blue-500/20 text-blue-200', 'friends');
-        fillWithPhotos('listDamad', d.damadBahnoi, 'border-pink-500/20 text-pink-100', 'damads');
+        // Render Lists
+        document.getElementById('listFamily').innerHTML = '';
+        d.familyMain.forEach(name => document.getElementById('listFamily').appendChild(createPhotoCard(name)));
+
+        document.getElementById('listFriends').innerHTML = '';
+        d.friends.forEach(name => document.getElementById('listFriends').appendChild(createPhotoCard(name)));
+
+        document.getElementById('listDamad').innerHTML = '';
+        d.damadBahnoi.forEach(name => document.getElementById('listDamad').appendChild(createPhotoCard(name)));
 
         // Kids
-        const kidsEl = document.getElementById('listKids');
-        if (kidsEl) {
-            kidsEl.innerHTML = '';
-            d.kids.forEach(name => {
-                const div = document.createElement('div');
-                div.className = `glass-card px-6 py-2.5 rounded-full font-bold border border-white/10 text-yellow-200`;
-                div.textContent = name;
-                kidsEl.appendChild(div);
-            });
-        }
+        const kidsContainer = document.getElementById('listKids');
+        kidsContainer.innerHTML = '';
+        d.kids.forEach((name, i) => {
+            const kidDiv = document.createElement('div');
+            kidDiv.className = `kid-card glass-card rounded-3xl p-4 w-32 text-center`;
+            kidDiv.setAttribute('data-aos', 'zoom-in');
+            kidDiv.setAttribute('data-aos-delay', i * 70);
+
+            const kidFile = name + ".jpg";
+
+            kidDiv.innerHTML = `
+                <div class="w-24 h-24 mx-auto rounded-2xl overflow-hidden border-4 border-yellow-400 shadow-lg mb-3">
+                    <img src="${kidFile}" class="w-full h-full object-cover"
+                         onerror="this.src='https://via.placeholder.com/150/222/fff?text=${name[0]}'">
+                </div>
+                <p class="font-semibold text-sm">${name}</p>
+            `;
+            kidDiv.onclick = () => showBigPhoto(kidFile);
+            kidsContainer.appendChild(kidDiv);
+        });
 
         // Host
         document.getElementById('hostName').innerText = d.host.name;
         document.getElementById('hostAddr').innerText = d.host.address;
-        const phoneLink = document.getElementById('hostPhone');
-        if (phoneLink) {
-            phoneLink.innerHTML = `<i class="fa-solid fa-phone"></i> Call: ${d.host.phone}`;
-            phoneLink.href = `tel:${d.host.phone}`;
-        }
+
+        const phoneEl = document.getElementById('hostPhone');
+        phoneEl.innerHTML = `<i class="fa-solid fa-phone"></i> ${d.host.phone}`;
+        phoneEl.href = `tel:${d.host.phone}`;
     }
 </script>
 </body>
